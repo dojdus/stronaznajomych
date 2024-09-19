@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="pl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strona znajomych</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            position: relative;
+            overflow: hidden; /* Ukrycie przewijania */
+        }
+        header {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+        }
+        nav {
+            margin: 20px 0;
+            text-align: center;
+        }
+        nav button {
+            margin: 0 15px;
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            font-size: 16px;
+            cursor: pointer;
+        }
+        nav button:hover {
+            background-color: #45a049;
+        }
+        section {
+            display: none;
+            padding: 20px;
+            background-color: #fff;
+            margin: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            transform: scale(1.1); /* Powiększenie sekcji */
+            opacity: 0; /* Sekcja jest niewidoczna na początku */
+            transition: transform 0.5s ease, opacity 0.5s ease; /* Płynne przejście */
+        }
+        .active {
+            display: block;
+            transform: scale(1); /* Normalny rozmiar */
+            opacity: 1; /* Sekcja staje się widoczna */
+        }
+        footer {
+            background-color: #3c8d40; /* Ciemnozielone tło */
+            color: #f0f0f0; /* Jasny, stonowany kolor tekstu */
+            text-align: center;
+            padding: 15px 0;
+            font-size: 14px;
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            opacity: 0.9; /* Zmniejszenie intensywności */
+        }
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.7);
+            opacity: 0;
+            pointer-events: none; /* Blokowanie interakcji */
+            transition: opacity 0.5s ease; /* Płynne przejście */
+            z-index: 10; /* Nad innymi elementami */
+        }
+        .overlay.active {
+            opacity: 1;
+            pointer-events: auto; /* Włączanie interakcji */
+        }
+        .music-container {
+            text-align: center;
+            margin: 20px 0;
+        }
+        .music-container button {
+            padding: 10px 15px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 5px;
+            margin: 0 5px; /* Margines między przyciskami */
+        }
+        .music-container button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>Witamy na stronie znajomych!</h1>
+</header>
+
+<nav>
+    <!-- Przyciski nawigacyjne do sekcji -->
+    <button onclick="showSection('glowna')">Strona główna</button>
+    <button onclick="showSection('wspomnienia')">Wspomnienia</button>
+    <button onclick="showSection('wyzwania')">Wyzwania</button>
+    <button onclick="showSection('kalendarz')">Kalendarz</button>
+    <button onclick="showSection('przepisy')">Przepisy</button>
+    <button onclick="showSection('quizy')">Quizy</button>
+</nav>
+
+<!-- Zasłona dymna -->
+<div class="overlay" id="overlay"></div>
+
+<!-- Sekcje -->
+<section id="glowna" class="active">
+    <h2>Strona główna</h2>
+    <p>Witamy na naszej wspólnej stronie, gdzie dzielimy się wspomnieniami, wyzwaniami, przepisami i więcej!</p>
+    
+    <div class="music-container">
+        <span>&#127926;</span> <!-- Ikona nuty -->
+        <button onclick="playMusic()">Play</button>
+        <button onclick="stopMusic()">Stop</button>
+        <audio id="backgroundMusic" src="file:///C:/Users/Wojtek/Desktop/parapetówka.mp3"></audio> <!-- Zmień na ścieżkę do swojej piosenki -->
+    </div>
+</section>
+
+<section id="wspomnienia">
+    <h2>Nasze wspomnienia</h2>
+    <p>Dodaj swoje wspomnienia poniżej:</p>
+    <div class="gallery">
+        <!-- Dodaj zdjęcia -->
+        <img src="zdjecie1.png" alt="Zdjęcie 1" width="100" height="100">
+        <img src="zdjecie2.png" alt="Zdjęcie 2" width="100" height="100">
+    </div>
+</section>
+
+<section id="wyzwania">
+    <h2>Wyzwania</h2>
+    <p>Tutaj znajdziesz nasze grupowe wyzwania.</p>
+    <ul>
+        <li>Wyzwanie 1: Jeszcze nie wiem co tu będzie</li>
+        <li>Wyzwanie 2: Jeszcze nie wiem co tu będzie</li>
+    </ul>
+</section>
+
+<section id="kalendarz">
+    <h2>Kalendarz wydarzeń</h2>
+    <table border="1" cellspacing="0" cellpadding="10">
+        <tr>
+            <th>Data</th>
+            <th>Wydarzenie</th>
+        </tr>
+        <tr>
+            <td>21.09.2024</td>
+            <td>Ryby</td>
+        </tr>
+        <tr>
+            <td>22.09.2024</td>
+            <td>Ryby</td>
+        </tr>
+    </table>
+</section>
+
+<section id="przepisy">
+    <h2>Nasze przepisy</h2>
+    <p>Dodaj swoje ulubione przepisy tutaj.</p>
+    <ul>
+        <li><strong>Nie wiem:</strong> Nie wiem co tu będzie.</li>
+        <li><strong>Ale przykład od Wojtusia: Pizza:</strong> Ciasto, sos pomidorowy, ser, dodatki.</li>
+    </ul>
+</section>
+
+<section id="quizy">
+    <h2>Quizy i gry</h2>
+    <p>Sprawdź swoją wiedzę w quizach!</p>
+    <ul>
+        <li>Quiz 1: Jak dobrze znasz przyjaciół?</li>
+        <li>Quiz 2: Sprawdź swoją wiedzę o filmach.</li>
+    </ul>
+</section>
+
+<!-- Stopka -->
+<footer>
+    <p>Strona stworzona dla znajomych - Wszelkie prawa zastrzeżone &copy; 2024</p>
+    <p style="font-size: 12px; margin: 0; text-align: right;">Autor strony: @dojduss</p>
+</footer>
+
+
+<script>
+    function showSection(sectionId) {
+        const overlay = document.getElementById('overlay');
+
+        // Pokazanie zasłony dymnej
+        overlay.classList.add('active');
+
+        // Po krótkim czasie ukryj wszystkie sekcje i pokaż wybraną
+        setTimeout(() => {
+            var sections = document.querySelectorAll('section');
+            sections.forEach(function(section) {
+                section.classList.remove('active');
+            });
+
+            var activeSection = document.getElementById(sectionId);
+            activeSection.classList.add('active');
+
+            // Ukrycie zasłony dymnej po pokazaniu sekcji
+            overlay.classList.remove('active');
+        }, 500); // Czas trwania zasłony dymnej
+    }
+
+    function playMusic() {
+        const audio = document.getElementById('backgroundMusic');
+        audio.play();
+    }
+
+    function stopMusic() {
+        const audio = document.getElementById('backgroundMusic');
+        audio.pause(); // Zatrzymanie odtwarzania
+        audio.currentTime = 0; // Resetowanie do początku
+    }
+</script>
+
+</body>
+</html>
